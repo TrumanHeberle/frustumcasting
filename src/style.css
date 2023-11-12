@@ -1,0 +1,12 @@
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+svg * {
+    transform: translate3d(50%, 50%, 0);
+}
