@@ -1,14 +1,6 @@
 // define globals
 const scene = document.getElementById("scene");
 const cursor = document.getElementById("cursor");
-const camera = document.getElementById("camera");
-const pov = document.getElementById("pov");
-const fov = 30;
-const far = 500;
-let cursorX = 0;
-let cursorY = 0;
-let cameraX = 0;
-let cameraY = 0;
 let centerX = 0;
 let centerY = 0;
 let newLine = undefined;
@@ -21,30 +13,26 @@ function resize() {
     centerY = (box.top + box.bottom) / 2;
 }
 
-function project() {
-
-}
-
 function mousemove(mouse) {
-    cursorX = mouse.clientX - centerX;
-    cursorY = mouse.clientY - centerY;
-    cursor.setAttribute("cx", cursorX);
-    cursor.setAttribute("cy", cursorY);
+    const x = mouse.clientX - centerX;
+    const y = mouse.clientY - centerY;
+    cursor.setAttribute("cx", x);
+    cursor.setAttribute("cy", y);
     if (newLine) {
-        newLine.setAttribute('x2', cursorX);
-        newLine.setAttribute('y2', cursorY);
+        newLine.setAttribute('x2', x);
+        newLine.setAttribute('y2', y);
     }
     project();
 }
 
 function mousedown(mouse) {
-    cursorX = mouse.clientX - centerX;
-    cursorY = mouse.clientY - centerY;
+    const x = mouse.clientX - centerX;
+    const y = mouse.clientY - centerY;
     newLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    newLine.setAttribute('x1', cursorX);
-    newLine.setAttribute('y1', cursorY);
-    newLine.setAttribute('x2', cursorX);
-    newLine.setAttribute('y2', cursorY);
+    newLine.setAttribute('x1', x);
+    newLine.setAttribute('y1', y);
+    newLine.setAttribute('x2', x);
+    newLine.setAttribute('y2', y);
     newLine.setAttribute("stroke", "grey")
     newLine.setAttribute("stroke-width", 1);
     scene.appendChild(newLine);
@@ -53,12 +41,12 @@ function mousedown(mouse) {
 }
 
 function mouseup(mouse) {
-    cursorX = mouse.clientX - centerX;
-    cursorY = mouse.clientY - centerY;
+    const x = mouse.clientX - centerX;
+    const y = mouse.clientY - centerY;
     scene.onmouseup = undefined;
     scene.onmousedown = mousedown;
-    newLine.setAttribute('x2', cursorX);
-    newLine.setAttribute('y2', cursorY);
+    newLine.setAttribute('x2', x);
+    newLine.setAttribute('y2', y);
     newLine.setAttribute("stroke", "orange")
     newLine.setAttribute("stroke-width", 3);
     newLine = undefined;
